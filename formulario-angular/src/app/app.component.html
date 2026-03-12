@@ -1,0 +1,120 @@
+<mat-card>
+
+  <mat-card-header>
+    <mat-card-title>Cadastro de Usuário</mat-card-title>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-content>
+
+    <form [formGroup]="userForm" (ngSubmit)="submitted = true">
+
+      <!-- NOME -->
+      <div>
+        <label>Nome</label>
+        <input
+          type="text"
+          formControlName="name"
+          placeholder="Digite seu nome"
+        >
+
+        <div *ngIf="submitted && userForm.controls['name'].errors">
+
+          <small *ngIf="userForm.controls['name'].errors?.['required']">
+            Nome é obrigatório
+          </small>
+
+          <small *ngIf="userForm.controls['name'].errors?.['minlength']">
+            Nome deve ter no mínimo 3 caracteres
+          </small>
+
+        </div>
+      </div>
+
+      <br>
+
+      <!-- EMAIL -->
+      <div>
+        <label>Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Digite seu email"
+        >
+
+        <div *ngIf="submitted && userForm.controls['email'].errors">
+
+          <small *ngIf="userForm.controls['email'].errors?.['required']">
+            Email é obrigatório
+          </small>
+
+          <small *ngIf="userForm.controls['email'].errors?.['email']">
+            Email inválido
+          </small>
+
+        </div>
+      </div>
+
+      <br>
+
+      <!-- TELEFONE -->
+      <div>
+        <label>Telefone</label>
+        <input
+          type="text"
+          formControlName="phone"
+          mask="(00) 00000-0000"
+          placeholder="(00) 00000-0000"
+        >
+
+        <div *ngIf="submitted && userForm.controls['phone'].errors">
+
+          <small *ngIf="userForm.controls['phone'].errors?.['required']">
+            Telefone é obrigatório
+          </small>
+
+        </div>
+      </div>
+
+      <br>
+
+      <!-- SENHA -->
+      <div>
+        <label>Senha</label>
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="Digite sua senha"
+        >
+
+        <div *ngIf="submitted && userForm.controls['password'].errors">
+
+          <small *ngIf="userForm.controls['password'].errors?.['required']">
+            Senha é obrigatória
+          </small>
+
+          <small *ngIf="userForm.controls['password'].errors?.['strongPassword']">
+            A senha precisa ter:
+            <br>
+            8 caracteres
+            <br>
+            1 letra maiúscula
+            <br>
+            1 número
+          </small>
+
+        </div>
+      </div>
+
+      <br>
+
+      <button mat-raised-button color="primary" type="submit">
+        Enviar
+      </button>
+
+    </form>
+
+  </mat-card-content>
+
+</mat-card>

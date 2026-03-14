@@ -2,7 +2,7 @@
 
 ⚠️ **Projeto em desenvolvimento**
 
-Este projeto está sendo desenvolvido para praticar **Angular moderno**, formulários reativos e validação de dados.
+Este projeto está sendo desenvolvido para praticar **Angular**, formulários reativos e validação de dados.
 
 ## 📌 Sobre o projeto
 
@@ -23,7 +23,7 @@ O objetivo é praticar conceitos importantes utilizados em aplicações profissi
 Clone o repositório:
 
 ```
-git clone https://github.com/SEU-USUARIO/angular-forms.git
+git clone https://github.com/wanessa-antonio/angular-forms.git
 ```
 
 Entre na pasta do projeto:

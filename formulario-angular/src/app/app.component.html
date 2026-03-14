@@ -10,104 +10,56 @@
 
     <form [formGroup]="userForm" (ngSubmit)="submitted = true">
 
-      <!-- NOME -->
       <div>
-        <label>Nome</label>
-        <input
-          type="text"
-          formControlName="name"
-          placeholder="Digite seu nome"
-        >
+        <label>Nome*</label>
+        <input type="text" formControlName="name" placeholder="Digite seu nome">
 
-        <div *ngIf="submitted && userForm.controls['name'].errors">
+        <small *ngIf="submitted && userForm.controls['name'].errors?.['required']">
+          Nome é obrigatório
+        </small>
 
-          <small *ngIf="userForm.controls['name'].errors?.['required']">
-            Nome é obrigatório
-          </small>
-
-          <small *ngIf="userForm.controls['name'].errors?.['minlength']">
-            Nome deve ter no mínimo 3 caracteres
-          </small>
-
-        </div>
+        <small *ngIf="submitted && userForm.controls['name'].errors?.['minlength']">
+          Nome deve ter no mínimo 3 caracteres
+        </small>
       </div>
 
-      <br>
-
-      <!-- EMAIL -->
       <div>
-        <label>Email</label>
-        <input
-          type="email"
-          formControlName="email"
-          placeholder="Digite seu email"
-        >
+        <label>Email*</label>
+        <input type="email" formControlName="email" placeholder="Digite seu email">
 
-        <div *ngIf="submitted && userForm.controls['email'].errors">
+        <small *ngIf="submitted && userForm.controls['email'].errors?.['required']">
+          Email é obrigatório
+        </small>
 
-          <small *ngIf="userForm.controls['email'].errors?.['required']">
-            Email é obrigatório
-          </small>
-
-          <small *ngIf="userForm.controls['email'].errors?.['email']">
-            Email inválido
-          </small>
-
-        </div>
+        <small *ngIf="submitted && userForm.controls['email'].errors?.['email']">
+          Email inválido
+        </small>
       </div>
 
-      <br>
-
-      <!-- TELEFONE -->
       <div>
-        <label>Telefone</label>
-        <input
-          type="text"
-          formControlName="phone"
-          mask="(00) 00000-0000"
-          placeholder="(00) 00000-0000"
-        >
+        <label>Telefone*</label>
+        <input type="text"
+               formControlName="phone"
+               mask="(00) 00000-0000"
+               placeholder="(00) 00000-0000">
 
-        <div *ngIf="submitted && userForm.controls['phone'].errors">
-
-          <small *ngIf="userForm.controls['phone'].errors?.['required']">
-            Telefone é obrigatório
-          </small>
-
-        </div>
+        <small *ngIf="submitted && userForm.controls['phone'].errors?.['required']">
+          Telefone é obrigatório
+        </small>
       </div>
 
-      <br>
-
-      <!-- SENHA -->
       <div>
-        <label>Senha</label>
-        <input
-          type="password"
-          formControlName="password"
-          placeholder="Digite sua senha"
-        >
+        <label>Senha*</label>
+        <input type="password" formControlName="password" placeholder="Digite sua senha">
 
-        <div *ngIf="submitted && userForm.controls['password'].errors">
+        <small *ngIf="submitted && userForm.controls['password'].errors?.['required']">
+          Senha obrigatória
+        </small>
 
-          <small *ngIf="userForm.controls['password'].errors?.['required']">
-            Senha é obrigatória
-          </small>
-
-          <small *ngIf="userForm.controls['password'].errors?.['strongPassword']">
-            A senha precisa ter:
-            <br>
-            8 caracteres
-            <br>
-            1 letra maiúscula
-            <br>
-            1 número
-          </small>
-
-        </div>
+        <small *ngIf="submitted && userForm.controls['password'].errors?.['strongPassword']">
+          8 caracteres, 1 maiúscula e 1 número
+        </small>
       </div>
-
-      <br>
 
       <button mat-raised-button color="primary" type="submit">
         Enviar

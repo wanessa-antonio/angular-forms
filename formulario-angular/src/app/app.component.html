@@ -8,11 +8,25 @@
 
   <mat-card-content>
 
-    <form [formGroup]="userForm" (ngSubmit)="submitted = true">
+    <div *ngIf="submitted && totalErrors > 0">
+      {{ totalErrors }} campo(s) com erro
+    </div>
+
+    <div *ngIf="success" class="success-message">
+      Usuário cadastrado com sucesso!
+    </div>
+
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+      <!-- NOME -->
 
       <div>
         <label>Nome*</label>
-        <input type="text" formControlName="name" placeholder="Digite seu nome">
+        <input
+          type="text"
+          formControlName="name"
+          placeholder="Digite seu nome"
+        >
 
         <small *ngIf="submitted && userForm.controls['name'].errors?.['required']">
           Nome é obrigatório
@@ -23,9 +37,15 @@
         </small>
       </div>
 
+      <!-- EMAIL -->
+
       <div>
         <label>Email*</label>
-        <input type="email" formControlName="email" placeholder="Digite seu email">
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Digite seu email"
+        >
 
         <small *ngIf="submitted && userForm.controls['email'].errors?.['required']">
           Email é obrigatório
@@ -36,21 +56,31 @@
         </small>
       </div>
 
+      <!-- TELEFONE -->
+
       <div>
         <label>Telefone*</label>
-        <input type="text"
-               formControlName="phone"
-               mask="(00) 00000-0000"
-               placeholder="(00) 00000-0000">
+        <input
+          type="text"
+          formControlName="phone"
+          mask="(00) 00000-0000"
+          placeholder="(00) 00000-0000"
+        >
 
         <small *ngIf="submitted && userForm.controls['phone'].errors?.['required']">
           Telefone é obrigatório
         </small>
       </div>
 
+      <!-- SENHA -->
+
       <div>
         <label>Senha*</label>
-        <input type="password" formControlName="password" placeholder="Digite sua senha">
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="Digite sua senha"
+        >
 
         <small *ngIf="submitted && userForm.controls['password'].errors?.['required']">
           Senha obrigatória
@@ -59,13 +89,50 @@
         <small *ngIf="submitted && userForm.controls['password'].errors?.['strongPassword']">
           8 caracteres, 1 maiúscula e 1 número
         </small>
+
+        <small>
+          {{ userForm.controls['password'].value?.length || 0 }}/8 caracteres
+        </small>
       </div>
 
-      <button mat-raised-button color="primary" type="submit">
-        Enviar
-      </button>
+      <!-- BOTÕES -->
+
+      <div style="display:flex; gap:10px; margin-top:10px;">
+
+        <button
+          mat-raised-button
+          type="submit"
+          [disabled]="userForm.invalid">
+
+          Enviar
+
+        </button>
+
+        <button
+          type="button"
+          (click)="clearForm()">
+
+          Limpar
+
+        </button>
+
+      </div>
 
     </form>
+
+    <!-- PREVIEW DOS DADOS -->
+
+    <div *ngIf="submittedData" class="preview">
+
+      <mat-divider></mat-divider>
+
+      <h3 class="preview-title">Dados enviados</h3>
+
+      <p><b>Nome:</b> {{ submittedData.name }}</p>
+      <p><b>Email:</b> {{ submittedData.email }}</p>
+      <p><b>Telefone:</b> {{ submittedData.phone }}</p>
+
+    </div>
 
   </mat-card-content>
 

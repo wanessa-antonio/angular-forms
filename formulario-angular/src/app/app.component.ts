@@ -21,7 +21,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -38,16 +37,16 @@ import { MatInputModule } from '@angular/material/input';
     MatDividerModule,
     MatFormFieldModule,
     MatInputModule
-
-  ],
-  providers: []
+  ]
 })
 export class AppComponent {
 
   userForm: FormGroup;
   submitted = false;
-  apiResponse: any;
+  success = false;
   totalErrors = 0;
+  apiResponse: any;
+  submittedData: any;
 
   constructor(private fb: FormBuilder, private http: HttpClient) {
 
@@ -90,6 +89,46 @@ export class AppComponent {
     const passwordValid = hasUpperCase && hasNumber && hasMinLength;
 
     return passwordValid ? null : { strongPassword: true };
+
+  }
+
+  onSubmit() {
+
+    this.submitted = true;
+    this.success = false;
+
+    if (this.userForm.invalid) {
+
+      this.totalErrors = Object.keys(this.userForm.controls)
+        .filter(key => this.userForm.get(key)?.invalid).length;
+
+      return;
+    }
+
+    const formData = this.userForm.value;
+
+    console.log("Enviando para API...", formData);
+
+    setTimeout(() => {
+
+      console.log("Resposta da API: sucesso");
+
+      this.success = true;
+      this.submittedData = formData;
+
+      this.userForm.reset();
+      this.submitted = false;
+
+    }, 1000);
+
+  }
+
+  clearForm() {
+
+    this.userForm.reset();
+    this.submitted = false;
+    this.success = false;
+    this.submittedData = null;
 
   }
 
